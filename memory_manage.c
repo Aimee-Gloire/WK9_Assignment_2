@@ -26,16 +26,16 @@ void freeEmailMemory(char **emails, int count) {
 int main() {
     // Sample email addresses for 2023M cohort
     char sampleEmails[INITIAL_STUDENTS][MAX_EMAIL_LENGTH] = {
-        "john.smith@university.edu",
-        "alice.johnson@university.edu",
-        "bob.wilson@university.edu",
-        "carol.davis@university.edu",
-        "david.brown@university.edu",
-        "emma.miller@university.edu",
-        "frank.garcia@university.edu",
-        "grace.rodriguez@university.edu",
-        "henry.martinez@university.edu",
-        "ivy.anderson@university.edu"
+        "alice@university.edu",
+        "alice.1@university.edu",
+        "alice.3@university.edu",
+        "david@university.edu",
+        "david.1@university.edu",
+        "david.2@university.edu",
+        "grace@university.edu",
+        "grace.1@university.edu",
+        "grace.2@university.edu",
+        "john.1@university.edu"
     };
     
     printf("=== Dynamic Memory Management for Student Emails ===\n");
@@ -123,8 +123,10 @@ int main() {
     freeEmailMemory(callocEmails, REDUCED_STUDENTS);
     
     printf("All memory successfully freed!\n");
-    
-    // Justification for dynamic memory management
+
+    printf("\n");
+
+     // Justification for dynamic memory management
     printf("\n=== Why Dynamic Memory Management is Important ===\n");
     printf("1. FLEXIBILITY: Allows runtime memory allocation based on actual needs\n");
     printf("2. EFFICIENCY: Prevents memory waste by allocating only required amount\n");
