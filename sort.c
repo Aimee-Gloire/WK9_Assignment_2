@@ -4,16 +4,21 @@
 #define MAX_NAMES 20
 #define MAX_NAME_LENGTH 50
 
+typedef int (*compare_func)(const char *, const char *);
 
 int ascending_compare(const char *a, const char *b) { return strcmp(a, b) > 0; }
 
+int descending_compare(const char *a, const char *b) {
+  return strcmp(a, b) < 0;
+}
+
 // Bubble sort function using function pointer
-void bubble_sort(char names[][MAX_NAME_LENGTH], int n, int asc) {
+void bubble_sort(char names[][MAX_NAME_LENGTH], int n, compare_func compare) {
   char temp[MAX_NAME_LENGTH];
 
   for (int i = 0; i < n - 1; i++) {
     for (int j = 0; j < n - i - 1; j++) {
-      if (ascending_compare(names[j], names[j + 1]) == asc) {
+      if (compare(names[j], names[j + 1])) {
         // Swap names[j] and names[j + 1]
         strcpy(temp, names[j]);
         strcpy(names[j], names[j + 1]);
@@ -47,6 +52,8 @@ int main() {
       "Hakizamungu Robert",    "Uwamahoro Lillian"};
 
   char order[10];
+  compare_func compare;
+
 
   printf("Original list of names:\n\n");
   for (int i = 0; i < num_names; i++) {
@@ -56,13 +63,16 @@ int main() {
   printf("\nEnter sorting order (asc for ascending, desc for descending): \n");
   scanf("%s", order);
 
+  // Set function pointer based on user choice
   if (strcmp(order, "asc") == 0) {
+    compare = ascending_compare;
     printf("\nSorting in ascending order...\n");
-    bubble_sort(names, num_names, 1);
   } else {
+    compare = descending_compare;
     printf("\nSorting in descending order...\n");
-    bubble_sort(names, num_names, 0);
   }
+
+  bubble_sort(names, num_names, compare);
 
   print_names(names, num_names);
 
